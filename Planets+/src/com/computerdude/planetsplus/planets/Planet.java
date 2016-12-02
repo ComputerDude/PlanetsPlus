@@ -3,6 +3,7 @@ package com.computerdude.planetsplus.planets;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.potion.PotionEffect;
@@ -12,77 +13,77 @@ import com.computerdude.planetsplus.main.Main;
 
 public class Planet implements Listener {
 
-	private static String name;
-	private static String number;
-	private static boolean canLive;
-	private static boolean hasOxygen;
-	private static boolean allowTown;
-	private static boolean allowSethome;
-	private static boolean hasAnimals;
-	private static boolean canBreak;
+	private String name;
+	private int number;
+	private boolean survivable;
+	private boolean hasOxygen;
+	private boolean allowTown;
+	private boolean allowSethome;
+	private boolean hasAnimals;
+	private boolean canBreak;
 
 	public String getName() {
 		return name;
 	}
 
-	private static void setName(String name) {
-		Planet.name = name;
+	private static void setName(String _name) {
+		name = _name;
 	}
 
 	public String getNumber() {
 		return number;
 	}
 
-	private static void setNumber(String number) {
-		Planet.number = number;
+	private static void setNumber(String _number) {
+		number = _number;
 	}
 
-	public boolean isCanLive() {
-		return canLive;
+	public boolean isSurvivable() {
+		return survivable;
 	}
 
-	private static void setCanLive(boolean canLive) {
-		Planet.canLive = canLive;
+	private static void setSurvivable(boolean _survivable) {
+		survivable = _survivable;
 	}
 
-	public boolean isHasOxygen() {
+	public boolean doesHaveOxygen() {
 		return hasOxygen;
 	}
 
-	private static void setHasOxygen(boolean hasOxygen) {
-		Planet.hasOxygen = hasOxygen;
+	private static void setHasOxygen(boolean _hasOxygen) {
+		hasOxygen = _hasOxygen;
 	}
 
-	public boolean isAllowTown() {
+	public boolean doesAllowTown() {
 		return allowTown;
 	}
 
-	private static void setAllowTown(boolean allowTown) {
-		Planet.allowTown = allowTown;
+	private static void setAllowTown(boolean _allowTown) {
+		allowTown = _allowTown;
 	}
 
-	public boolean isAllowSethome() {
+	public boolean doesAllowSethome() {
 		return allowSethome;
 	}
 
-	private static void setAllowSethome(boolean allowSethome) {
-		Planet.allowSethome = allowSethome;
+	private static void setAllowSethome(boolean _allowSethome) {
+		allowSethome = _allowSethome;
 	}
 
-	public boolean isHasAnimals() {
+	public boolean doesHaveAnimals() {
 		return hasAnimals;
 	}
 
-	private static void setHasAnimals(boolean hasAnimals) {
-		Planet.hasAnimals = hasAnimals;
+	private static void setHasAnimals(boolean _hasAnimals) {
+		hasAnimals = _hasAnimals;
 	}
 
-	public boolean isCanBreak() {
+	public boolean playerCanBreak() {
 		return canBreak;
 	}
 
-	private static void setCanBreak(boolean canBreak) {
-		Planet.canBreak = canBreak;
+	private static void setCanBreak(boolean _canBreak) {
+		canBreak = _canBreak;
 	}
 
 	public Planet(String name, String number, boolean canLive, boolean hasOxygen, boolean allowTown,
@@ -115,6 +116,11 @@ public class Planet implements Listener {
 		if(canBreak == false) {
 			e.setCancelled(true);
 		}
+	}
+	
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent e) {
+		if(canBreak == false) e.setCancelled(true);
 	}
 
 	
