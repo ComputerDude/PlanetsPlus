@@ -6,10 +6,10 @@ import com.computerdude.planetsplus.planets.Planet;
 
 public class Zespoanov implements Listener{
 
-	public static Planet zespoanov;
-
-	public static void setZespoanov(Planet zespoanov) {
-		Zespoanov.zespoanov = zespoanov;
+	public Zespoanov() {
+		super("Zespoanov", 2, true, true, false,
+			false, true, true);
 	}
+
 	
 }

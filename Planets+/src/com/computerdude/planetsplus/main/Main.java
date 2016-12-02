@@ -1,5 +1,7 @@
 package com.computerdude.planetsplus.main;
 
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.computerdude.planetsplus.planets.Planet;
@@ -12,8 +14,10 @@ public class Main extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		Zespoanov.setZespoanov(new Planet("zespoanov", "6-E", true, true, false, false, true, false));
-		Sun.setSun(new Planet("sun", "5-R", false, false, false, false, false, false));
+		PluginManager pm = Bukkit.getServer().getPluginManager();
+		
+		pm.registerEvents(new Sun(), this);
+		pm.registerEvents(new Zespoanov(), this);
 	}
 
 	@Override
